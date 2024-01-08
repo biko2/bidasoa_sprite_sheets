@@ -1,0 +1,10 @@
+services:
+  bidasoa_sprite_sheets.loader:
+    class: Drupal\bidasoa_sprite_sheets\Services\SpriteSheetLoader
+    arguments: ['@config.factory','@messenger']
+  bidasoa_sprite_sheets.renderer:
+    class: Drupal\bidasoa_sprite_sheets\Services\SpriteSheetRenderer
+    arguments: [ '@bidasoa_sprite_sheets.loader' ]
+  bidasoa_sprite_sheets.manager:
+    class: Drupal\bidasoa_sprite_sheets\Services\SpriteSheetManager
+    arguments: [ '@config.storage', '@entity_type.manager' ]

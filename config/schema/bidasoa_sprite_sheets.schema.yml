@@ -1,0 +1,16 @@
+bidasoa_sprite_sheets.sprite_sheet.*:
+  type: config_entity
+  label: 'Sprite sheets'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    path:
+      type: string
+      label: 'Path'
+    uuid:
+      type: string
+      label: 'UUID'
+    label:
+      type: label
+      label: 'Label'

@@ -1,0 +1,6 @@
+name: SVG Sprites
+type: module
+description: 'SVG sprite sheet management'
+package: Bidasoa
+core_version_requirement: ^10
+configure: entity.sprite_sheet.list

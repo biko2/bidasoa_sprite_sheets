@@ -1,0 +1,12 @@
+bidasoa_sprite_sheets.add_action:
+  route_name: entity.sprite_sheet.add_form
+  title: 'Add Sprite sheet'
+  appears_on:
+    - entity.sprite_sheet.list
+
+bidasoa_sprite_sheets.list_action:
+  route_name: entity.sprite_sheet.list
+  title: 'List sprite sheets'
+  appears_on:
+    - entity.sprite_sheet.add_form
+    - entity.sprite_sheet.edit_form

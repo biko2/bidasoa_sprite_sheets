@@ -1,0 +1,15 @@
+<?php
+function bidasoa_sprite_sheets_theme(){
+  return [
+    'svg_sprite' => [
+      'variables' => [ 'id' => NULL, 'sheet'=> '', 'svgSpritePath' => NULL, 'customClass' => NULL, 'size' => 32]
+    ],
+    'svg_sprite_browser_grid' => [
+      'variables' => [ 'elements' => []]
+    ],
+    'svg_sprite_browser_grid_item' => [
+      'variables' => [ 'id' => NULL, 'sheet'=> '', 'content' => NULL]
+    ]
+  ];
+}
+

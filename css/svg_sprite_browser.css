@@ -1,0 +1,13 @@
+.svg-library-views-form {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 8vw);
+  grid-gap: 15px;
+}
+.svg-library-item--grid {
+  text-align: center;
+  color: var(--gin-color-text);
+}
+.svg-library-item--grid.checked {
+  background-color: var(--gin-bg-item-hover);
+}

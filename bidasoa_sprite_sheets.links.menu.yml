@@ -1,0 +1,6 @@
+bidasoa_sprite_sheets.menu:
+  title: Sprite sheets
+  route_name: entity.sprite_sheet.list
+  description: 'Manage Sprite sheets'
+  parent: system.admin_config_content
+

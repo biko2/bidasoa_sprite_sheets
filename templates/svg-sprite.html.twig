@@ -1,0 +1,10 @@
+{% if id != "" %}
+<svg {{attributes}} data-sheet="{{ sheet }}" data-drupal-selector="{{ id }}" width="{{size}}px" height="{{size}}px" class="icon icon-{{size}} {{ customClass }} svg--{{ id }}-dims">
+
+
+    <use xlink:href="{{ svgSpritePath }}#{{ id }}"></use>
+  </svg>
+{% else %}
+<svg width="0px" height="0px" class="{{ customClass }}"></svg>
+
+{% endif %}

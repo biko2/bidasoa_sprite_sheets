@@ -1,0 +1,16 @@
+<div {{ attributes.addClass('js-svg-sprite-browser-item media-library-item svg-library-item--grid') }}
+    data-svg-sprite-sheet="{{ sheet }}"
+    data-svg-sprite-id="{{ id }}"
+    data-svg-sprite-machine-name="{{ sheet }}.{{ id }}"
+>
+  <div class="svg-library-item__preview">
+    <div class="sprite-wrapper">
+      {{ content }}
+    </div>
+  </div>
+  <div class="svg-library-item__attributes">
+    <div class="svg-library-item__name">
+      {{ id }}
+    </div>
+  </div>
+</div>
