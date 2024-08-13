@@ -30,8 +30,7 @@ class LinkAttributeSvgSprite extends FieldPluginBase {
       $options = $value->getUrl()->getOptions();
 
       $attributeValue = NestedArray::getValue($options, ['attributes', 'icon']);
-      yield $attributeValue ? ['icon' => $attributeValue] : [];
-
+      yield $attributeValue ? $attributeValue : [];
     }
   }
 
