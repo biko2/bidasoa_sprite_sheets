@@ -29,8 +29,10 @@ class LinkAttributeSvgSprite extends FieldPluginBase {
     if ($value instanceof LinkItemInterface) {
       $options = $value->getUrl()->getOptions();
 
-      $attributeValue = NestedArray::getValue($options, ['attributes', 'icon']);
-      yield $attributeValue ? $attributeValue : [];
+        $attributeValue = NestedArray::getValue($options, ['attributes', 'icon']);
+        if(!empty($attributeValue['sheet']) &&  !empty($attributeValue['sprite']))
+            yield ['id' => $attributeValue['sprite'], 'sheet' => $attributeValue['sheet']];
+        yield null;
     }
   }
 
