@@ -92,98 +92,13 @@ class LinkWithAttributesAndSvgSpriteWidget extends LinkWithAttributesWidget {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
     $item_value = $items[$delta]->getValue();
 
-    $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
-    $form['#attached']['library'][] = 'bidasoa_sprite_sheets/ajax';
-
-    $svg_sprite_element = [];
-
-    $spriteDefaultValue = (isset($item_value['options']['attributes']['icon']['sprite'])) ? $item_value['options']['attributes']['icon']['sprite'] : SvgSpriteHelper::NONE_KEY;
-
-    $sheetDefaultValue = (isset($item_value['options']['attributes']['icon']['sheet'])) ? $item_value['options']['attributes']['icon']['sheet'] : SvgSpriteHelper::NONE_KEY;
-    $selectedSpriteSheet = \Drupal::service('bidasoa_sprite_sheets.manager')->getSpriteSheetFromId($sheetDefaultValue);
-
-    $sheets = $this->spriteSheetManager->getSpriteSheetsFromIds($this->getSetting('sheets'));
-
-    $sheetWidgetId = Html::getUniqueId('sheet_widget');
-    $spriteWidgetId = Html::getUniqueId('sprite_widget');
-    $previewWidgetId = Html::getUniqueId('preview_widget');
-
-    $svg_sprite_element['sprite_container'] = [
-      '#type' => 'fieldset',
-      '#title' => t('Icon'),
+    $svg_sprite_element = [
+      '#type' => 'bidasoa_sprite_sheets_icon',
+      '#title' => $this->fieldDefinition->getLabel(),
       '#description' => $this->fieldDefinition->getDescription(),
-      '#required' => False,
-      '#element_validate' => [
-        [$this, 'validate'],
-      ],
-    ];
-    $svg_sprite_element['sprite_container']['sheet'] = [
-      '#type' => 'textfield',
-      '#default_value' => $sheetDefaultValue,
-      '#attributes' => [
-        'style' => 'display:none',
-        'id' => [
-          $sheetWidgetId,
-        ],
-      ],
-
-    ];
-    $svg_sprite_element['sprite_container']['sprite'] = [
-      '#type' => 'textfield',
-      '#default_value' => $spriteDefaultValue,
-      '#attributes' => [
-        'style' => 'display:none',
-        'id' => [
-          $spriteWidgetId,
-        ],
-      ],
-    ];
-
-    $svg_sprite_element['sprite_container']['sprite_preview'] = $this->spriteSheetRenderer->getRenderArray($selectedSpriteSheet,$spriteDefaultValue,$previewWidgetId);
-
-    $svg_sprite_element['sprite_container']['actions'] = [];
-    $svg_sprite_element['sprite_container']['actions']['dialog_link'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Browse'),
-      '#url' => Url::fromRoute(
-        'svg_sprite_browser.widget_form',
-        [
-        ],[
-        'query'=>[
-          'selected_sheet' => $sheetDefaultValue,
-          'selected_sprite' => $spriteDefaultValue,
-          'sheet_field_id' => $sheetWidgetId,
-          'sprite_field_id' => $spriteWidgetId,
-          'preview_field_id' => $previewWidgetId,
-          'sprite_sheets' =>implode(',',$sheets)
-        ]]),
-      '#attributes' => [
-        'class' => [
-          'use-ajax',
-          'button',
-          'button--primary',
-        ],
-      ],
-    ];
-
-    $svg_sprite_element['sprite_container']['actions']['clear'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Clear'),
-      '#url' => Url::fromRoute(
-        'svg_sprite_browser.clear_form',
-        [
-        ],[
-        'query'=>[
-          'sheet_field_id' => $sheetWidgetId,
-          'sprite_field_id' => $spriteWidgetId,
-          'preview_field_id' => $previewWidgetId,
-        ]]),
-      '#attributes' => [
-        'class' => [
-          'use-ajax',
-          'button',
-        ],
-      ],
+      '#required' => $this->fieldDefinition->isRequired(),
+      '#sheets' => $this->getSetting('sheets'),
+      '#default_value' => $item_value['options']['attributes']['icon'] ?? ['sheet' => SvgSpriteHelper::NONE_KEY, 'sprite' => SvgSpriteHelper::NONE_KEY],
     ];
     $element += $svg_sprite_element;
     return $element;
@@ -212,6 +127,10 @@ class LinkWithAttributesAndSvgSpriteWidget extends LinkWithAttributesWidget {
         'sheet' => $value['sprite_container']['sheet'],
         'sprite' => $value['sprite_container']['sprite'],
       ];
+      /*$values[$delta]['attributes']['icon'] = [
+        'sheet' => $value['sprite_container']['sheet'],
+        'sprite' => $value['sprite_container']['sprite'],
+      ];*/
 
     }
 
